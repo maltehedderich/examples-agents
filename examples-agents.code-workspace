@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": "."
+    },
+    {
+      "name": "openai-example",
+      "path": "./openai-example"
+    }
+  ],
+  "settings": {}
+}
