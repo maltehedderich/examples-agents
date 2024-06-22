@@ -9,7 +9,7 @@
 
 ## About <a name = "about"></a>
 
-This repository is meant to contain a curated collection of diverse AI agent examples, showcasing various techniques and frameworks. In general AI agents are programs that can perceive their environment, make decisions, and act upon the environment. Within this repository, we will be focusing on agents LLM Agents, which are accesed through a chat interface. These agents will be able to interact with the user, and provide information or perform tasks based on the user's input.
+This repository is meant to contain a curated collection of diverse AI agent examples, showcasing various techniques and frameworks. In general AI agents are programs that can perceive their environment, make decisions, and act upon the environment. Within this repository, we will be focusing on LLM-based agents that are accessible via a chat interface. These agents will be able to interact with the user, and provide information or perform tasks based on the user's input.
 
 This repository is meant to be used as a reference for developers who are looking to learn more about AI agents in the LLM context, or are looking to implement their own agents.
 
