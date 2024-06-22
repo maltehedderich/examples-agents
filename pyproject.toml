@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "examples-agents"
+package-mode = false
+version = "0.1.0"
+description = "A curated collection of diverse AI agent examples, showcasing various techniques and frameworks."
+authors = ["Malte Hedderich <github@hedderich.pro>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+pre-commit = "^3.7.1"
+
+
+[tool.poetry.group.openai.dependencies]
+openai = "^1.35.3"
+pydantic-settings = "^2.3.3"
+streamlit = "^1.36.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
