@@ -23,23 +23,17 @@ All agent examples are based on Python, so you will need to have Python installe
 
 ### Installing
 
-Each agent example is contained within its own directory, and has a corresponding group within the `pyproject.toml` file. You can install all dependencies for all agent examples by running the following command:
+Each agent example is contained within its own directory within the `agents` directory, and has a corresponding `pyproject.toml` file. You can install the dependencies for each agent by running the following command within the agent's directory:
 
 ```bash
 poetry install
-```
-
-This will install all dependencies for all agent examples. If you would like to install dependencies for a specific agent example, you can use the `only` flag of poetry and specify the relevant groups. For example, to install dependencies for the `openai` example, you can run the following command:
-
-```bash
-poetry install --only openai
 ```
 
 ## Usage <a name = "usage"></a>
 
 ### Agents with Streamlit Interface
 
-To run an agent with a Streamlit interface, you can use the following command:
+To run an agent with a Streamlit interface, you can use the following command within the agent's directory:
 
 ```bash
 poetry run streamlit run <path_to_agent_file>
@@ -48,5 +42,5 @@ poetry run streamlit run <path_to_agent_file>
 For example, to run the `openai` agent, you can run the following command:
 
 ```bash
-poetry run streamlit run agents/openai/main.py
+poetry run streamlit run openai_example/main.py
 ```
