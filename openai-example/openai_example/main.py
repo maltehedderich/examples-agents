@@ -57,7 +57,7 @@ def chat() -> None:
 
 
 def main() -> None:
-    st.set_page_config(page_title=settings.app_name, page_icon=settings.app_icon)
+    st.set_page_config(page_title=settings.app_name, page_icon="🤖")
     st.title("OpenAI Agent")
     initailize_session()
     chat()
