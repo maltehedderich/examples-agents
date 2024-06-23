@@ -44,6 +44,20 @@ class OpenAIService:
                     },
                 ),
             ),
+            ChatCompletionToolParam(
+                type="function",
+                function=FunctionDefinition(
+                    name="delete_jira_issue",
+                    description="Delete a Jira issue with the provided issue key.",
+                    parameters={
+                        "type": "object",
+                        "properties": {
+                            "issue_key": {"type": "string", "description": "The key of the Jira issue to delete."},
+                        },
+                        "required": ["issue_key"],
+                    },
+                ),
+            ),
         ]
 
     def generate(
