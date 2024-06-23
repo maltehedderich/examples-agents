@@ -7,7 +7,7 @@
     {
       "name": "openai-example",
       "path": "./openai-example"
-    }
+    },
     {
       "name": "langchain-example",
       "path": "./langchain-example"
