@@ -7,9 +7,8 @@ from openai.types.chat import (
     ChatCompletionUserMessageParam,
 )
 from openai_example.services.openai import OpenAIService
-from openai_example.settings import Settings
+from openai_example.settings import settings
 
-settings = Settings()
 openai_service = OpenAIService(
     azure_endpoint=settings.azure_openai_endpoint,
     api_key=settings.azure_openai_api_key,

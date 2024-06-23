@@ -13,3 +13,7 @@ class Settings(BaseSettings, env_file=".env"):  # type: ignore
     jira_base_url: HttpUrl
     jira_username: str
     jira_api_token: SecretStr
+    jira_project_key: str
+
+
+settings = Settings()

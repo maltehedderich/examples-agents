@@ -1,15 +1,15 @@
 import json
 
+import openai_example.controllers.tools as tools
 from openai import AzureOpenAI
 from openai.types.chat import (
-    ChatCompletionAssistantMessageParam,
     ChatCompletionMessage,
     ChatCompletionMessageParam,
+    ChatCompletionNamedToolChoiceParam,
     ChatCompletionToolMessageParam,
     ChatCompletionToolParam,
 )
 from openai.types.shared_params import FunctionDefinition
-from openai_example.controllers.tools import get_current_datetime
 from pydantic import HttpUrl, SecretStr
 
 
@@ -28,11 +28,27 @@ class OpenAIService:
                     name="get_current_datetime",
                     description="Get the current date and time in the format 'YYYY-MM-DD HH:MM:SS'.",
                 ),
-            )
+            ),
+            ChatCompletionToolParam(
+                type="function",
+                function=FunctionDefinition(
+                    name="create_jira_issue",
+                    description="Create a new Jira issue with the provided summary and description.",
+                    parameters={
+                        "type": "object",
+                        "properties": {
+                            "summary": {"type": "string", "description": "The summary of the Jira issue."},
+                            "description": {"type": "string", "description": "The description of the Jira issue."},
+                        },
+                        "required": ["summary", "description"],
+                    },
+                ),
+            ),
         ]
-        self.tools_map = {"get_current_datetime": get_current_datetime}
 
-    def generate(self, messages: list[ChatCompletionMessageParam]) -> ChatCompletionMessage:
+    def generate(
+        self, messages: list[ChatCompletionMessageParam], tools_choice: ChatCompletionNamedToolChoiceParam = "auto"
+    ) -> ChatCompletionMessage:
         # Step 1: Generate a response from the OpenAI model
         chat_completion = self._client.chat.completions.create(
             messages=messages, model=self._deployment_name, tools=self._tools
@@ -48,7 +64,8 @@ class OpenAIService:
             # Step 3: Iterate over the tool calls and execute the corresponding tool function
             tool_messages: list[ChatCompletionToolMessageParam] = []
             for tool_call in initial_response.tool_calls:
-                tool_response = self.tools_map[tool_call.function.name](**json.loads(tool_call.function.arguments))
+                tool_function = getattr(tools, tool_call.function.name)
+                tool_response = tool_function(**json.loads(tool_call.function.arguments))
                 tool_messages.append(
                     ChatCompletionToolMessageParam(
                         tool_call_id=tool_call.id,
@@ -58,4 +75,5 @@ class OpenAIService:
                     )
                 )
             # Step 4: Recursively call generate to update the response based on the tool calls
-            return self.generate(messages + [initial_response] + tool_messages)
+            # By passing tools_choice="none", we ensure there are no more tool calls in the next response
+            return self.generate(messages + [initial_response] + tool_messages, tools_choice="none")
