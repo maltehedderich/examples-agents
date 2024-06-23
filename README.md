@@ -44,3 +44,6 @@ For example, to run the `openai` agent, you can run the following command:
 ```bash
 poetry run streamlit run openai_example/main.py
 ```
+
+Note: Each agent example may have additional instructions in its respective README file. Furthermore, you will need to
+define some environment variables to run the agents. Please refer to the respective `.env.example` file for more information.
