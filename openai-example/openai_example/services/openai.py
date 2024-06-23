@@ -39,7 +39,7 @@ class OpenAIService:
         )
         initial_response = chat_completion.choices[0].message
         print("\nOpenAI Response Message:")
-        print(initial_response.model_dump_json())
+        print(initial_response.model_dump_json(indent=4))
 
         # Step 2: Check if the response contains tool calls
         if not initial_response.tool_calls:
