@@ -2,6 +2,7 @@ from typing import Literal
 
 import streamlit as st
 from openai.types.chat import (
+    ChatCompletionAssistantMessageParam,
     ChatCompletionSystemMessageParam,
     ChatCompletionUserMessageParam,
 )
@@ -21,7 +22,7 @@ def initailize_session() -> None:
     if "messages" not in st.session_state:
         st.session_state.messages = [
             ChatCompletionSystemMessageParam(
-                content="You are a helpful assistant.",
+                content="You are a helpful assistant. All your answers are concise and to the point.",
                 role="assistant",
             )
         ]
@@ -33,21 +34,26 @@ def display_messages() -> None:
             st.markdown(message["content"])
 
 
-def add_message(role: Literal["assistant", "user"], content: str) -> None:
+def display_and_append_message(role: Literal["assistant", "user"], content: str) -> None:
+    # Display the message
     with st.chat_message(role):
         st.markdown(content)
+
+    # Add the message to the session state
     if role == "user":
         st.session_state.messages.append(ChatCompletionUserMessageParam(content=content, role="user"))
+    elif role == "assistant":
+        st.session_state.messages.append(ChatCompletionAssistantMessageParam(content=content, role="assistant"))
     else:
-        st.session_state.messages.append(ChatCompletionSystemMessageParam(content=content, role="assistant"))
+        raise ValueError(f"Invalid role: {role}")
 
 
 def chat() -> None:
     display_messages()
     if prompt := st.chat_input("How can I help you?"):
-        add_message("user", prompt)
+        display_and_append_message("user", prompt)
         response = openai_service.generate(messages=st.session_state.messages)
-        add_message("assistant", response.content)
+        display_and_append_message("assistant", response.content)
 
 
 def main() -> None:
