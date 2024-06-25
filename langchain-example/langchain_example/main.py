@@ -4,7 +4,7 @@ import streamlit as st
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.messages import AIMessage
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_example.controllers.tools import all_tools
 from langchain_example.settings import settings
 from langchain_openai import AzureChatOpenAI
@@ -12,6 +12,7 @@ from langchain_openai import AzureChatOpenAI
 prompt = ChatPromptTemplate.from_messages(
     [
         ("system", "You are a helpful assistant. All your answers are concise and to the point."),
+        MessagesPlaceholder("chat_history"),
         ("human", "{input}"),
         ("placeholder", "{agent_scratchpad}"),
     ]
@@ -59,7 +60,7 @@ def chat() -> None:
     display_messages()
     if prompt := st.chat_input("How can I help you?"):
         display_and_append_message("user", prompt)
-        response = agent_executor.invoke({"input": prompt})
+        response = agent_executor.invoke({"input": prompt, "chat_history": st.session_state.history.messages})
         display_and_append_message("assistant", response["output"])
 
 
