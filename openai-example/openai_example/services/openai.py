@@ -65,7 +65,7 @@ class OpenAIService:
     ) -> ChatCompletionMessage:
         # Step 1: Generate a response from the OpenAI model
         chat_completion = self._client.chat.completions.create(
-            messages=messages, model=self._deployment_name, tools=self._tools
+            messages=messages, model=self._deployment_name, tools=self._tools, tool_choice=tools_choice
         )
         initial_response = chat_completion.choices[0].message
         print("\nOpenAI Response Message:")
