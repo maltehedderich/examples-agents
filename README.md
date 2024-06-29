@@ -36,8 +36,8 @@ This represents the most fundamental type of tools, wherein the LLM interface ut
 
 This concept is covered in the following agent examples:
 
-- [OpenAI](agents/openai_example)
-- [LangChain](agents/langchain_example)
+- [OpenAI](openai-example)
+- [LangChain](langchain-example)
 
 ### Memory
 
@@ -49,7 +49,7 @@ The update is usually done in a seperate LLM call, in which the latest conversat
 
 This concept is covered in the following agent examples:
 
-- [LangChain](agents/langchain_example)
+- [LangChain](langchain-example)
 
 ## Getting Started <a name = "getting_started"></a>
 
