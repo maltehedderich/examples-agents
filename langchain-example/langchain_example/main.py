@@ -59,7 +59,6 @@ def chat() -> None:
                 "output": response["output"],
             }
         )
-        print(st.session_state.knowledge_base)
 
 
 def main() -> None:

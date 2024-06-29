@@ -37,14 +37,14 @@ def get_jira_issue(issue_key: str) -> JiraIssue | HTTPError:
 
     Returns
     -------
-    str
-        The JSON representation of the issue.
+    JiraIssue | HTTPError
+        The Jira issue or an HTTP error if the issue could not be retrieved.
     """
     return jira_service.get_issue(issue_key=issue_key)
 
 
 @tool
-def create_jira_issue(summary: str, description: str) -> str:
+def create_jira_issue(summary: str, description: str) -> JiraIssue | HTTPError:
     """Create a new Jira issue with the given summary and description.
 
     Parameters
@@ -56,10 +56,10 @@ def create_jira_issue(summary: str, description: str) -> str:
 
     Returns
     -------
-    str
-        The JSON representation of the created issue.
+    JiraIssue | HTTPError
+        The created Jira issue or an HTTP error if the issue could not be created.
     """
-    return json.dumps(jira_service.create_issue(summary=summary, description=description))
+    return jira_service.create_issue(summary=summary, description=description)
 
 
 @tool
