@@ -4,12 +4,15 @@ import streamlit as st
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.messages import AIMessage
 from langchain_example.agent.core import agent_executor
+from langchain_example.agent.memory import KnowledgeBase, update_knowledge_chain
 from langchain_example.settings import settings
 
 
 def initailize_session() -> None:
     if "history" not in st.session_state:
         st.session_state.history = ChatMessageHistory()
+    if "knowledge_base" not in st.session_state:
+        st.session_state.knowledge_base = KnowledgeBase()
 
 
 def display_messages() -> None:
@@ -37,8 +40,26 @@ def chat() -> None:
     display_messages()
     if prompt := st.chat_input("How can I help you?"):
         display_and_append_message("user", prompt)
-        response = agent_executor.invoke({"input": prompt, "chat_history": st.session_state.history.messages})
+
+        # Invoke the agent to generate a response
+        response = agent_executor.invoke(
+            {
+                "input": prompt,
+                "chat_history": st.session_state.history.messages,
+                "knowledge_base": st.session_state.knowledge_base,
+            }
+        )
         display_and_append_message("assistant", response["output"])
+
+        # Update the knowledge base
+        st.session_state.knowledge_base = update_knowledge_chain.invoke(
+            {
+                "knowledge_base": st.session_state.knowledge_base,
+                "input": prompt,
+                "output": response["output"],
+            }
+        )
+        print(st.session_state.knowledge_base)
 
 
 def main() -> None:

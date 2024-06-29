@@ -4,9 +4,17 @@ from langchain_example.agent.tools import all_tools
 from langchain_example.settings import settings
 from langchain_openai import AzureChatOpenAI
 
+# This is the external prompt that the agent will use to generate responses.
 prompt = ChatPromptTemplate.from_messages(
     [
-        ("system", "You are a helpful assistant. All your answers are concise and to the point."),
+        (
+            "system",
+            (
+                "You are a helpful assistant. All your answers are concise and to the point."
+                " Your running knowledge base is {knowledge_base}."
+                " This is ONLY for your reference; do not share this with the user."
+            ),
+        ),
         MessagesPlaceholder("chat_history"),
         ("human", "{input}"),
         ("placeholder", "{agent_scratchpad}"),

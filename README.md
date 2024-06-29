@@ -39,6 +39,18 @@ This concept is covered in the following agent examples:
 - [OpenAI](agents/openai_example)
 - [LangChain](agents/langchain_example)
 
+### Memory
+
+#### Running State
+
+This concept involves the agent maintaining a running state, which is updated as the agent interacts with the user. The state is used to store information about the user's request, and is updated as the agent processes the request. The state can be used to store information about the user's request, such as the user's name, the user's location, or the user's preferences and use case specific information.
+
+The update is usually done in a seperate LLM call, in which the latest conversation history and the current state is passed to the LMM model. The model then updates the state based on the conversation history and the current state.
+
+This concept is covered in the following agent examples:
+
+- [LangChain](agents/langchain_example)
+
 ## Getting Started <a name = "getting_started"></a>
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
