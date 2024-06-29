@@ -2,8 +2,9 @@ import json
 from datetime import datetime
 
 from langchain.tools import tool
-from langchain_example.services.jira import JiraService
+from langchain_example.services.jira import JiraIssue, JiraService
 from langchain_example.settings import settings
+from requests import HTTPError
 
 jira_service = JiraService(
     base_url=settings.jira_base_url,
@@ -23,6 +24,23 @@ def get_current_datetime() -> str:
         The current date and time in the format 'YYYY-MM-DD HH:MM:SS'.
     """
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
+@tool
+def get_jira_issue(issue_key: str) -> JiraIssue | HTTPError:
+    """Get the Jira issue with the given key. Use this tool whenever you need to get information about a Jira issue.
+
+    Parameters
+    ----------
+    issue_key : str
+        The key of the issue to get.
+
+    Returns
+    -------
+    str
+        The JSON representation of the issue.
+    """
+    return jira_service.get_issue(issue_key=issue_key)
 
 
 @tool
@@ -61,4 +79,4 @@ def delete_jira_issue(issue_key: str) -> str:
     return jira_service.delete_issue(issue_key=issue_key)
 
 
-all_tools = [get_current_datetime, create_jira_issue, delete_jira_issue]
+all_tools = [get_current_datetime, get_jira_issue, create_jira_issue, delete_jira_issue]

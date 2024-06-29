@@ -1,5 +1,3 @@
-from typing import Annotated
-
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_core.prompts import (
     ChatPromptTemplate,
@@ -7,12 +5,14 @@ from langchain_core.prompts import (
     PromptTemplate,
     SystemMessagePromptTemplate,
 )
+from langchain_example.services.jira import JiraIssue
 from langchain_example.settings import settings
 from langchain_openai import AzureChatOpenAI
 from pydantic import BaseModel, Field
 
 
 class KnowledgeBase(BaseModel):
+    # General information about the user and the conversation.
     first_name: str = Field(
         "unknown", description="The first name of the user which is used to personalize the responses."
     )
@@ -24,6 +24,9 @@ class KnowledgeBase(BaseModel):
     )
     open_problems: list[str] = Field([], description="Topics of the conversation that are still not resolved.")
     current_goals: list[str] = Field([], description="Current goal of the agent to address.")
+
+    # Jira Issue information
+    jira_issue: JiraIssue | None = None
 
 
 knowledge_parser = PydanticOutputParser(pydantic_object=KnowledgeBase)
