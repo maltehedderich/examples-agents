@@ -12,6 +12,19 @@ class JiraService:
         self._api_token = api_token
         self._project_key = jira_project_key
 
+    def get_issue(self, issue_key: str) -> dict:
+        try:
+            url = str(self._base_url) + f"/rest/api/2/issue/{issue_key}"
+            response = requests.get(
+                url,
+                auth=(self._username, self._api_token.get_secret_value()),
+            )
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.HTTPError as e:
+            logging.error(f"Error getting Jira issue with key {issue_key}: {e}")
+            return {"error": str(e)}
+
     def create_issue(self, summary: str, description: str) -> dict:
         try:
             url = str(self._base_url) + "/rest/api/2/issue"
