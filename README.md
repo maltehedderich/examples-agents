@@ -26,6 +26,19 @@ The `Agent Core` is the main component of the AI agent, and is responsible for p
 
 This repository is meant to be used as a reference for developers who are looking to learn more about AI agents in the LLM context, or are looking to implement their own agents.
 
+## Concepts
+
+### Tools
+
+#### Simple Function Calling
+
+This represents the most fundamental type of tools, wherein the LLM interface utilized by the agent incorporates support for tool functionality—essentially, a callable function. The agent can leverage this tool to execute a diverse array of tasks, including retrieving data from a database or dispatching an email.
+
+This concept is covered in the following agent examples:
+
+- [OpenAI](agents/openai_example)
+- [LangChain](agents/langchain_example)
+
 ## Getting Started <a name = "getting_started"></a>
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
