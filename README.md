@@ -73,3 +73,7 @@ poetry run streamlit run openai_example/main.py
 
 Note: Each agent example may have additional instructions in its respective README file. Furthermore, you will need to
 define some environment variables to run the agents. Please refer to the respective `.env.example` file for more information.
+
+## Recommended Learning Resources
+
+- [NVIDIA: Building RAG Agents with LLMs](https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-15+V1)
