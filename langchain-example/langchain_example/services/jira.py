@@ -13,7 +13,7 @@ class JiraProject(BaseModel):
     self_: HttpUrl = Field(..., alias="self")
 
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
         extra = "ignore"
 
 
@@ -22,7 +22,7 @@ class JiraIssueFields(BaseModel):
     description: str
 
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
         extra = "ignore"
 
 
@@ -33,7 +33,7 @@ class JiraIssue(BaseModel):
     fields: JiraIssueFields | None = None
 
     class Config:
-        allow_population_by_field_name = True
+        populate_by_name = True
 
 
 class JiraService:
