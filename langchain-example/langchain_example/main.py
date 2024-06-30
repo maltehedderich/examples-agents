@@ -45,7 +45,7 @@ def chat() -> None:
         response = agent_executor.invoke(
             {
                 "input": prompt,
-                "chat_history": st.session_state.history.messages,
+                "chat_history": st.session_state.history.messages[-4:],
                 "knowledge_base": st.session_state.knowledge_base,
             }
         )
