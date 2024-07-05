@@ -1,6 +1,6 @@
 import json
 
-import openai_example.controllers.tools as tools
+import openai_example.agent.tools as tools
 from openai import AzureOpenAI
 from openai.types.chat import (
     ChatCompletionMessage,
