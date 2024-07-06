@@ -7,7 +7,7 @@
 - [Usage](#usage)
 - [Contributing](../CONTRIBUTING.md)
 
-## About <a name = "about"></a>
+## About `<a name = "about"></a>`
 
 This repository is meant to contain a curated collection of diverse AI agent examples, showcasing various techniques and frameworks. In general AI agents are programs that can perceive their environment, make decisions, and act upon the environment. Within this repository, we will be focusing on LLM-based agents that are accessible via a chat interface. These agents will be able to interact with the user, and provide information or perform tasks based on the user's input.
 
@@ -38,6 +38,7 @@ This concept is covered in the following agent examples:
 
 - [OpenAI](openai-example)
 - [LangChain](langchain-example)
+- [Anthropic](anthropic-example)
 
 ### Memory
 
@@ -51,7 +52,7 @@ This concept is covered in the following agent examples:
 
 - [LangChain](langchain-example)
 
-## Getting Started <a name = "getting_started"></a>
+## Getting Started `<a name = "getting_started"></a>`
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
@@ -67,7 +68,7 @@ Each agent example is contained within its own directory within the `agents` dir
 poetry install
 ```
 
-## Usage <a name = "usage"></a>
+## Usage `<a name = "usage"></a>`
 
 ### Agents with Streamlit Interface
 
