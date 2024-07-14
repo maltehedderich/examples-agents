@@ -17,7 +17,8 @@ def get_current_datetime() -> str:
 
 
 def create_jira_issue(summary: str, description: str) -> str:
-    return json.dumps(jira_service.create_issue(summary=summary, description=description))
+    response = jira_service.create_issue(summary=summary, description=description)
+    return response.model_dump_json() if not isinstance(response, Exception) else str(response)
 
 
 def delete_jira_issue(issue_key: str) -> str:
