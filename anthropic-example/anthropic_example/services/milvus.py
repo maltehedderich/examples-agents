@@ -11,7 +11,7 @@ from pymilvus import (
 )
 
 
-class Indexer:
+class MilvusService:
     def __init__(self, milvus_uri: HttpUrl, embedding_generator: EmbeddingGenerator, collection_name: str):
         self.client: MilvusClient = MilvusClient(uri=str(milvus_uri))
         self.embedding_generator: EmbeddingGenerator = embedding_generator

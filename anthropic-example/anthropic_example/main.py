@@ -1,11 +1,8 @@
 from typing import Literal
 
 import streamlit as st
-from anthropic.types import MessageParam
-from anthropic_example.services.anthropic import AnthropicService
 from anthropic_example.settings import settings
-
-anthropic_service = AnthropicService(api_key=settings.anthropic_api_key)
+from anthropic_example.shared import get_anthropic_service
 
 
 def initailize_session() -> None:
@@ -29,6 +26,7 @@ def display_and_append_message(role: Literal["assistant", "user"], content: str)
 
 
 def chat() -> None:
+    anthropic_service = get_anthropic_service()
     display_messages()
     if prompt := st.chat_input("How can I help you?"):
         display_and_append_message("user", prompt)
