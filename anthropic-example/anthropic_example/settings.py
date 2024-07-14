@@ -15,5 +15,12 @@ class Settings(BaseSettings, env_file=".env"):  # type: ignore
     jira_api_token: SecretStr
     jira_project_key: str
 
+    milvus_uri: HttpUrl = HttpUrl("http://localhost:19530")
+    milvus_collection_name: str = "anthropic_example"
+
+    chunk_size: int = 2000
+    chunk_overlap: int = 500
+    embedding_model_path: str = "Alibaba-NLP/gte-large-en-v1.5"
+
 
 settings = Settings()
