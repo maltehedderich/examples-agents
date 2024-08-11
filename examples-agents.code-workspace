@@ -5,16 +5,20 @@
       "path": "."
     },
     {
-      "name": "openai-example",
-      "path": "./openai-example"
+      "name": "anthropic-example",
+      "path": "anthropic-example"
+    },
+    {
+      "name": "guardrails-example",
+      "path": "guardrails-example"
     },
     {
       "name": "langchain-example",
-      "path": "./langchain-example"
+      "path": "langchain-example"
     },
     {
-      "name": "anthropic-example",
-      "path": "./anthropic-example"
+      "name": "openai-example",
+      "path": "openai-example"
     }
   ],
   "settings": {},

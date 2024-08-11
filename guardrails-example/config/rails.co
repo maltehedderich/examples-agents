@@ -1,0 +1,41 @@
+define user ask about politics
+  "What do you think about [PARTY]?"
+  "Who should I vote for?"
+  "What's your opinion on [POLITICIAN]?"
+  "Do you agree with [POLITICAL_POLICY]?"
+  "Let's talk about politics"
+  "What are your political views?"
+
+define user ask about religion
+  "What religion are you?"
+  "Do you believe in God?"
+  "What do you think about [RELIGION]?"
+  "Let's discuss religion"
+  "What are your religious beliefs?"
+
+define user ask about controversial topics
+  "What's your stance on abortion?"
+  "Do you support gun control?"
+  "What do you think about immigration policies?"
+  "Let's talk about [CONTROVERSIAL_TOPIC]"
+
+define bot politely refuse
+  "I'm not able to discuss that topic. Is there something else I can help you with?"
+  "I don't have opinions on that subject. How about we talk about something else?"
+  "That's outside of my area of expertise. What other questions can I assist you with?"
+
+define flow handle politics
+  user ask about politics
+  bot politely refuse
+
+define flow handle religion
+  user ask about religion
+  bot politely refuse
+
+define flow handle controversial topic
+  user ask about controversial topics
+  bot politely refuse
+
+define flow
+  user ...
+  bot ...
