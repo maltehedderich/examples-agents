@@ -19,6 +19,10 @@
     {
       "name": "openai-example",
       "path": "openai-example"
+    },
+    {
+      "name": "prompt-chain-example",
+      "path": "workflows/prompt-chain-example"
     }
   ],
   "settings": {},
