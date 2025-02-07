@@ -67,8 +67,6 @@ The app will be available at `http://localhost:8501`.
 
 - [@maltehedderich](https://github.com/maltehedderich)
 
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
-
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
-- Anthropic for their excellent blog post on building effective agents with LLMs. [Read the blog post](https://www.anthropic.com/research/building-effective-agents)
+- Kudos to Anthropic for their insightful blog post on crafting effective agents using large language models. [Explore the blog post](https://www.anthropic.com/research/building-effective-agents)
