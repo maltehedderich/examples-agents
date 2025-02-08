@@ -35,3 +35,10 @@ class RiskAssessment(BaseModel):
     risk_level: RiskLevel = Field(..., description="Risk assessment level for the clause")
     risk_description: str = Field(..., min_length=50, description="Detailed risk analysis")
     risk_category: str = Field(..., description="Risk category, e.g., Regulatory, Financial, Operational")
+
+
+class ClauseWithRiskAssessment(BaseModel):
+    """Combined model for clause and risk assessment"""
+
+    clause: Clause
+    risk_assessment: RiskAssessment
