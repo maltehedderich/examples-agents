@@ -1,8 +1,10 @@
-from enum import Enum
+from typing import TypeVar
 
 from google import genai  # type: ignore
-from google.genai.types import GenerateContentConfig, SchemaUnion  # type: ignore
+from google.genai.types import GenerateContentConfig  # type: ignore
 from pydantic import BaseModel, SecretStr
+
+T = TypeVar("T", bound=BaseModel)
 
 
 class GeminiService:
@@ -11,12 +13,27 @@ class GeminiService:
         self.temperature = temperature
         self.client = genai.Client(api_key=api_key.get_secret_value())
 
-    def generate(self, contents: str, response_schema: SchemaUnion | None = None) -> BaseModel | str:
-        config: GenerateContentConfig = {"temperature": self.temperature}
+    async def generate(self, contents: str) -> str:
+        config = GenerateContentConfig(
+            temperature=self.temperature,
+        )
 
-        if response_schema:
-            config["response_mime_type"] = "application/json"
-            config["response_schema"] = response_schema
+        response = await self.client.aio.models.generate_content(model=self.model, contents=contents, config=config)
 
-        response = self.client.models.generate_content(model=self.model, contents=contents, config=config)
-        return response.parsed if response_schema else response.text
+        return response.text
+
+    async def generate_structured(
+        self,
+        contents: str,
+        model: type[T] | type[list[T]],
+    ) -> T | list[T]:
+        config = GenerateContentConfig(
+            temperature=self.temperature,
+            response_mime_type="application/json",
+            response_schema=model,
+        )
+
+        response = await self.client.aio.models.generate_content(model=self.model, contents=contents, config=config)
+
+        assert response.parsed is not None, f"Failed to parse response: {response}"
+        return response.parsed
